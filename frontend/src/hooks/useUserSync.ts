@@ -30,7 +30,7 @@ const useUserSync = () => {
         imageUrl: user.imageUrl,
       });
     }
-  }, [isSignedIn, user, isPending, isSuccess]);
+  }, [isSignedIn, user, isPending, isSuccess, syncUserMutation]);
 
   return { isSynced: isSuccess };
 };
