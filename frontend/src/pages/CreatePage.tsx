@@ -3,6 +3,7 @@ import { useCreateProduct } from "../hooks/useProducts";
 import { useState, type FormEvent } from "react";
 import {
   ArrowLeftIcon,
+  DollarSignIcon,
   FileTextIcon,
   ImageIcon,
   SparklesIcon,
@@ -18,6 +19,7 @@ const CreatePage = () => {
     price: "",
     imageUrl: "",
   });
+  const [imageVisible, setImageVisible] = useState(true);
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
@@ -64,26 +66,40 @@ const CreatePage = () => {
                 placeholder="Image URL"
                 className="grow"
                 value={formData.imageUrl}
-                onChange={(e) =>
-                  setFormData({ ...formData, imageUrl: e.target.value })
-                }
+                onChange={(e) => {
+                  setFormData({ ...formData, imageUrl: e.target.value });
+                  setImageVisible(true);
+                }}
                 required
               />
             </label>
 
             {/* IMG PREVIEW */}
-            {formData.imageUrl && (
+            {formData.imageUrl && imageVisible && (
               <div className="rounded-box overflow-hidden">
                 <img
                   src={formData.imageUrl}
                   alt="Preview"
                   className="w-full h-40 object-cover"
-                  onError={(e) =>
-                    ((e.target as HTMLImageElement).style.display = "none")
-                  }
+                  onError={() => setImageVisible(false)}
                 />
               </div>
             )}
+
+            {/* PRICE INPUT */}
+            <label className="input input-bordered flex items-center gap-2 bg-base-200">
+              <DollarSignIcon className="size-4 text-base-content/50" />
+              <input
+                type="number"
+                placeholder="Price"
+                className="grow"
+                value={formData.price}
+                onChange={(e) =>
+                  setFormData({ ...formData, price: e.target.value })
+                }
+                required
+              />
+            </label>
 
             <div className="form-control">
               <div className="flex items-start gap-2 p-3 rounded-box bg-base-200 border border-base-300">

@@ -1,4 +1,4 @@
-import { SignInButton } from "@clerk/clerk-react";
+import { SignInButton, useUser } from "@clerk/clerk-react";
 import LoadingSpinner from "../components/LoadingSpinner";
 import { useProducts } from "../hooks/useProducts";
 import { PackageIcon, SparklesIcon } from "lucide-react";
@@ -6,6 +6,7 @@ import { Link } from "react-router";
 import ProductCard from "../components/ProductCard";
 
 const HomePage = () => {
+  const { user } = useUser();
   const { data: products = [], isLoading, error } = useProducts();
   if (isLoading) return <LoadingSpinner />;
 
@@ -35,12 +36,19 @@ const HomePage = () => {
             <p className="py-4 text-base-content/60">
               Upload, discover, and connect with creators.
             </p>
-            <SignInButton mode="modal">
-              <button className="btn btn-primary">
+            {!user ? (
+              <SignInButton mode="modal">
+                <button className="btn btn-primary">
+                  <SparklesIcon className="size-4" />
+                  Start Selling
+                </button>
+              </SignInButton>
+            ) : (
+              <Link to="/create" className="btn btn-primary">
                 <SparklesIcon className="size-4" />
                 Start Selling
-              </button>
-            </SignInButton>
+              </Link>
+            )}
           </div>
         </div>
       </div>
