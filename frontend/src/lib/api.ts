@@ -17,6 +17,11 @@ export interface Product {
   userId: string;
   createdAt: string;
   updatedAt: string;
+  user?: {
+    name: string | null;
+    imageUrl: string | null;
+  };
+  comments?: Comment[];
 }
 
 export interface UserData {
@@ -30,6 +35,18 @@ export interface ProductData {
   title: string;
   description: string;
   imageUrl: string;
+}
+
+export interface Comment {
+  id: string;
+  content: string;
+  userId: string;
+  productId: string;
+  createdAt: string;
+  user?: {
+    name: string | null;
+    imageUrl: string | null;
+  };
 }
 
 export const syncUser = async (userData: UserData) => {
