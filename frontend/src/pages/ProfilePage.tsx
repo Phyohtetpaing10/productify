@@ -11,7 +11,7 @@ import {
 
 const ProfilePage = () => {
   const navigate = useNavigate();
-  const { data: products, isLoading } = useMyProducts();
+  const { data: products = [], isLoading } = useMyProducts();
   const deleteProduct = useDeleteProduct();
 
   const handleDelete = (id: string) => {
