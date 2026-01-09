@@ -5,6 +5,7 @@ import {
   getAllProducts,
   getMyProducts,
   getProductById,
+  updateProduct,
 } from "../lib/api";
 
 export const useProducts = () => {
@@ -25,10 +26,10 @@ export const useCreateProduct = () => {
   });
 };
 
-export const useProduct = (id: string) => {
+export const useProduct = (id: string | undefined) => {
   return useQuery({
     queryKey: ["product", id],
-    queryFn: () => getProductById(id),
+    queryFn: () => getProductById(id!),
     enabled: !!id,
   });
 };
@@ -37,8 +38,10 @@ export const useDeleteProduct = () => {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: deleteProduct,
-    onSuccess: () => {
+    onSuccess: (_, id) => {
       queryClient.invalidateQueries({ queryKey: ["myProducts"] });
+      queryClient.invalidateQueries({ queryKey: ["products"] });
+      queryClient.invalidateQueries({ queryKey: ["product", id] });
     },
   });
 };
@@ -47,5 +50,19 @@ export const useMyProducts = () => {
   return useQuery({
     queryKey: ["myProducts"],
     queryFn: getMyProducts,
+  });
+};
+
+export const useUpdateProduct = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: updateProduct,
+    onSuccess: (_, variables) => {
+      queryClient.invalidateQueries({ queryKey: ["myProducts"] });
+      queryClient.invalidateQueries({
+        queryKey: ["product", variables.id],
+      });
+      queryClient.invalidateQueries({ queryKey: ["products"] });
+    },
   });
 };
