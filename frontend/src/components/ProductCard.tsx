@@ -1,14 +1,10 @@
 import { Link } from "react-router";
 import { MessageCircleIcon } from "lucide-react";
-import type { Product, User } from "../lib/api";
+import type { Product } from "../lib/api";
 
 const oneWeekAgo = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000);
 
-const ProductCard = ({
-  product,
-}: {
-  product: Product & { user?: User; comments?: unknown[] };
-}) => {
+const ProductCard = ({ product }: { product: Product }) => {
   const isNew = new Date(product.createdAt) > oneWeekAgo;
 
   return (

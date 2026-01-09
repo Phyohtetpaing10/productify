@@ -94,7 +94,10 @@ const CommentsSection = ({
             <div key={comment.id} className="chat chat-start">
               <div className="chat-image avatar">
                 <div className="w-8 rounded-full">
-                  <img src={comment.user?.imageUrl} alt={comment.user?.name} />
+                  <img
+                    src={comment.user?.imageUrl || "/avatar.png"}
+                    alt={comment.user?.name || "User"}
+                  />
                 </div>
               </div>
 

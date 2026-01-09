@@ -114,8 +114,8 @@ const ProductPage = () => {
                   <div className="avatar">
                     <div className="w-12 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
                       <img
-                        src={product.user.imageUrl}
-                        alt={product.user.name}
+                        src={product.user.imageUrl || "/avatar.png"}
+                        alt={product.user.name || "User"}
                       />
                     </div>
                   </div>
