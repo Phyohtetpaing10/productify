@@ -5,7 +5,7 @@ import { useProduct, useUpdateProduct } from "../hooks/useProducts";
 import EditProductForm from "../components/EditProductForm";
 
 const EditProductPage = () => {
-  const { id } = useParams() as { id: string };
+  const { id } = useParams();
   const { userId } = useAuth();
   const navigate = useNavigate();
 
@@ -36,7 +36,7 @@ const EditProductPage = () => {
       onSubmit={(formData) => {
         updateProduct.mutate(
           {
-            id,
+            id: id!,
             ...formData,
           },
           {

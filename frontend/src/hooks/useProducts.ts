@@ -26,10 +26,10 @@ export const useCreateProduct = () => {
   });
 };
 
-export const useProduct = (id: string) => {
+export const useProduct = (id: string | undefined) => {
   return useQuery({
     queryKey: ["product", id],
-    queryFn: () => getProductById(id),
+    queryFn: () => getProductById(id!),
     enabled: !!id,
   });
 };
