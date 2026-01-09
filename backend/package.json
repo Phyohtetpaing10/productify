@@ -15,6 +15,9 @@
   "type": "commonjs",
   "dependencies": {
     "@clerk/express": "^1.7.60",
+    "@types/cors": "^2.8.19",
+    "@types/express": "^5.0.6",
+    "@types/pg": "^8.16.0",
     "cors": "^2.8.5",
     "dotenv": "^17.2.3",
     "drizzle-orm": "^0.45.1",
@@ -23,9 +26,6 @@
     "typescript": "^5.9.3"
   },
   "devDependencies": {
-    "@types/cors": "^2.8.19",
-    "@types/express": "^5.0.6",
-    "@types/pg": "^8.16.0",
     "drizzle-kit": "^0.31.8",
     "nodemon": "^3.1.11",
     "ts-node": "^10.9.2"
